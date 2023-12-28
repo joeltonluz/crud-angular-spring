@@ -1,0 +1,52 @@
+[
+  {
+    "_id": "1",
+    "name": "Machine Learning Fundamentals",
+    "category": "Data Science"
+  },
+  {
+    "_id": "2",
+    "name": "React Native Development",
+    "category": "Mobile App Development"
+  },
+  {
+    "_id": "3",
+    "name": "Cybersecurity Basics",
+    "category": "Information Technology"
+  },
+  {
+    "_id": "4",
+    "name": "UI/UX Design Principles",
+    "category": "Design"
+  },
+  {
+    "_id": "5",
+    "name": "Python for Web Development",
+    "category": "Backend"
+  },
+  {
+    "_id": "6",
+    "name": "Digital Marketing Strategies",
+    "category": "Marketing"
+  },
+  {
+    "_id": "7",
+    "name": "iOS App Development with Swift",
+    "category": "Mobile App Development"
+  },
+  {
+    "_id": "8",
+    "name": "Agile Project Management",
+    "category": "Project Management"
+  },
+  {
+    "_id": "9",
+    "name": "Blockchain Basics",
+    "category": "Blockchain"
+  },
+  {
+    "_id": "10",
+    "name": "JavaScript Frameworks Comparison",
+    "category": "Frontend"
+  }
+]
