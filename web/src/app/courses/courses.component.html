@@ -1,28 +1,45 @@
 <p-card>
-  <p-toolbar> Cursos Disponíveis </p-toolbar>
 
   <div *ngIf="courses$ | async as courses; else loading">
     <p-table
-      [columns]="displayedColumns"
-      [value]="courses"
-      [tableStyle]="{ 'min-width': '50rem' }"
+    [value]="courses"
+    [tableStyle]="{ 'min-width': '50rem' }"
     >
-      <ng-template pTemplate="header" let-columns>
+      <ng-template pTemplate="caption">
+        <div class="caption-table">
+          <p-toolbar> Cursos Disponíveis </p-toolbar>
+          <p-button><i class="pi pi-plus"></i>Novo Registro</p-button>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
         <tr>
-          <th *ngFor="let col of columns">
-            {{ col }}
-          </th>
+          <th>Curso</th>
+          <th>Categoria</th>
+          <th>Ações</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <ng-template pTemplate="body" let-courses>
         <tr>
-          <td *ngFor="let col of columns">
-            {{ rowData[col] }}
-            <i class="pi pi-check">x</i>
-            <span class="pi pi-search">s</span>
+          <td>{{ courses.name }}</td>
+          <td>{{ courses.category }}<span class="pi pi-apple"></span></td>
+          <td>
+            <p-button><i class="pi pi-pencil"></i></p-button>
+            <p-button><i class="pi pi-trash"></i></p-button>
           </td>
         </tr>
+
       </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+            {{
+              courses
+              ? courses.length > 1
+                ? 'Temos um total de '+ courses.length + ' cursos'
+                : 'Temos um total de '+ courses.length + ' curso'
+              : 'Não há cursos cadastrados !'
+              }}.
+        </div>
+    </ng-template>
     </p-table>
   </div>
 
@@ -48,4 +65,3 @@
     ></p-button>
   </div> -->
 </p-card>
-<i class="pi pi-check">x</i>
