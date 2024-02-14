@@ -2,16 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { ICourse } from './model/course';
 import { SHARED } from '../shared';
 import { CoursesService } from './services/courses.service';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorDialogComponent } from '../shared/components/error-dialog/error-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MessageService } from 'primeng/api';
+import { ToastErrorComponent } from '../shared/components/toast-error/toast-error.component';
 
 @Component({
   selector: 'app-courses',
   standalone: true,
-  imports: [CommonModule, SHARED],
+  imports: [CommonModule, SHARED, ToastErrorComponent],
+  providers: [MessageService],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.scss',
 })
@@ -21,24 +22,35 @@ export class CoursesComponent implements OnInit {
 
   constructor(
     private coursesService: CoursesService,
-    public dialog: MatDialog
+    private messageService: MessageService
   ) {
     this.courses$ = this.coursesService.findAll().pipe(
+      map((data) => this.onSuccess(data)),
       catchError((error: HttpErrorResponse) => {
-        console.log(error);
         this.onError(error.message);
         return of([]);
       })
     );
   }
 
+  onSuccess(data: any) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Sucesso!',
+      detail: 'Sucesso!',
+    });
+    return data;
+  }
+
   onError(errorMessage: string) {
-    this.dialog.open(ErrorDialogComponent, {
-      data: errorMessage,
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: errorMessage,
+      life: 5000,
+      closable: true,
     });
   }
 
   ngOnInit(): void {}
-
-  //dataSource = this.courses;
 }
